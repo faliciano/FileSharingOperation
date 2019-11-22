@@ -58,11 +58,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Uri fileUri= FileProvider.getUriForFile(MainActivity.this,"us.syh.filesharingoperation.fileprovider",mImageFiles[finalI]);
-                        Intent intent=new Intent(MainActivity.this,FileSelectActivity.class);
-                        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                        intent.setDataAndType(fileUri,getContentResolver().getType(fileUri));
-                        //MainActivity.this.setResult(Activity.RESULT_OK,intent);
-                        startActivity(intent);
+                        System.out.println("FileUri:"+fileUri.toString());
+                        //Intent intent=new Intent();//MainActivity.this,FileSelectActivity.class);
+                        //为文件Uri添加授权
+                        mResultIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        mResultIntent.setDataAndType(fileUri,getContentResolver().getType(fileUri));
+                        MainActivity.this.setResult(Activity.RESULT_OK,mResultIntent);
                     }
                 });
                 LinearLayout_1.addView(imageView_new);
